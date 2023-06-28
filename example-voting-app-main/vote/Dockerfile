@@ -21,6 +21,10 @@ RUN pip install -r requirements.txt
 # Copy our code from the current folder to /app inside the container
 COPY . .
 
+# Replace the option_a and option_b values in the Flask application script
+RUN sed -i 's/os.getenv("OPTION_A", "Cats")/"${OPTION_A}"/g' app.py
+RUN sed -i 's/os.getenv("OPTION_B", "Dogs")/"${OPTION_B}"/g' app.py
+
 # Make port 80 available for links and/or publish
 EXPOSE 80
 
